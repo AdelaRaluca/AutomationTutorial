@@ -1,0 +1,33 @@
+-----------------------------
+Test Case 52SP2-578 :: Version : 4 :: Voice/Dialer check for invalid text
+
+https://jira-sec.ercom.fr/browse/CS-4025 
+ Invalid characters can be paste on secure dial up
+-----------
+Test Case 52SP2-512 :: Version : 5 :: Two VOIP calls in the same time
+
+https://jira-sec.ercom.fr/browse/CS-6544
+[5.2]Secure call can be initiated while in skype call
+
+Please observe comments
+------------------------
+Test Case 52SP2-1345 :: Version : 4 :: Camera blocked on other applications
+
+https://jira-sec.ercom.fr/browse/CS-6664 
+[5.2]No notification message in Skype/Whatsapp when we have BlockCamera=true
+-----------
+Test Case 52SP2-1202 :: Version : 4 :: BlockNfc - False
+Test Case 52SP2-1215 :: Version : 3 :: BlockNfc - Transition
+
+https://jira-sec.ercom.fr/browse/CS-5331
+[Mobile] Impossible to transfer files via NFC
+
+
+---------------
+https://jira-sec.ercom.fr/browse/CS-4176
+"Ciphering Error" for secured SMS sent in connected mode (incoming secured call)
+
+
+---------------
+Test Case 52SP2-2439 :: Version : 2 :: Protection status
+
