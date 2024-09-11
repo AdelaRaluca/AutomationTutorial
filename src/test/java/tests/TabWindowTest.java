@@ -1,5 +1,7 @@
 package tests;
 
+import helpMethods.ElementMethods;
+import helpMethods.TabMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +21,8 @@ public class TabWindowTest {
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
 
+        TabMethods tabMethods = new TabMethods(driver);
+
         WebElement browseMenu = driver.findElement(By.xpath("//h5[text()= 'Alerts, Frame & Windows']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();",browseMenu);
@@ -29,25 +33,17 @@ public class TabWindowTest {
         WebElement newTabElement = driver.findElement(By.id("tabButton"));
         js.executeScript("arguments[0].click();", newTabElement);
 
-        System.out.println("URL - ul paginii curente este"+driver.getCurrentUrl());
-        List<String> tabsList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabsList.get(1));
-        System.out.println("URL - ul paginii curente este"+driver.getCurrentUrl());
-
-        driver.close();
-
-        driver.switchTo().window(tabsList.get(0));
-        System.out.println("URL - ul paginii curente este"+driver.getCurrentUrl());
+        tabMethods.switchSpecificTab(1);
+        tabMethods.closeCurrentTab();
+        tabMethods.switchSpecificTab(0);
 
         WebElement newWindowElement = driver.findElement(By.id("windowButton"));
         js.executeScript("arguments[0].click();", newWindowElement);
         System.out.println("URL - ul paginii curente este"+driver.getCurrentUrl());
 
-        List<String> windowsList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(windowsList.get(1));
-        System.out.println("URL - ul paginii curente este"+driver.getCurrentUrl());
+        tabMethods.switchSpecificTab(1);
+        tabMethods.closeCurrentTab();
 
-        driver.close();
         driver.quit();
     }
 }
