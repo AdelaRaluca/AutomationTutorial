@@ -1,5 +1,6 @@
 package tests;
 
+import helpMethods.ElementMethods;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -13,6 +14,7 @@ import java.util.List;
 public class PracticeFormTest {
     public WebDriver driver;
 
+    ElementMethods elementMethods = new ElementMethods(driver);
     @Test
     public void metodaTest() {
         // deschidem un browser
@@ -25,39 +27,31 @@ public class PracticeFormTest {
         //identificarea unui element dupa text - xpath (tag, atribut, valoare) - identificare relativa // sau absoluta /- nu facem absolut (ex://h5[text()= "Elements"])
 
         WebElement formsMenu = driver.findElement(By.xpath("//h5[text()= 'Forms']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", formsMenu);
-
+        elementMethods.clickJSElement(formsMenu);
         WebElement practiceFormSubMenu = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        js.executeScript("arguments[0].click();", practiceFormSubMenu);
+        elementMethods.clickJSElement(practiceFormSubMenu);
 
         WebElement firstNameElement = driver.findElement(By.id("firstName"));
-        String firstNameValue = "Mirza";
-        firstNameElement.sendKeys(firstNameValue);
-
+        elementMethods.fillElement(firstNameElement, "Mirza");
         WebElement lastNameElement = driver.findElement(By.id("lastName"));
-        String lastNameValue = "Adela";
-        lastNameElement.sendKeys(lastNameValue);
+        elementMethods.fillElement(lastNameElement, "Adela");
 
         WebElement userEmailElement = driver.findElement(By.id("userEmail"));
-        String userEmailValue = "test@test.com";
-        userEmailElement.sendKeys(userEmailValue);
+        elementMethods.fillElement(userEmailElement, "test@test.com");
 
         List<WebElement> genderOptionsList = driver.findElements(By.xpath("//input[@name='gender']"));
         String genderValue = "Female";
 
         switch (genderValue) {
             case "Male":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(0));
+                elementMethods.clickElement(genderOptionsList.get(0));
                 break;
             case "Female":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(1));
+                elementMethods.clickJSElement(genderOptionsList.get(1));
                 break;
             case "Other":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(2));
+                elementMethods.clickJSElement(genderOptionsList.get(2));
                 break;
-
-
         }
 
         WebElement mobileNumberElement = driver.findElement(By.id("userNumber"));
@@ -77,7 +71,7 @@ public class PracticeFormTest {
         for (int index = 0; index < hobbiesOptionsList.size(); index++) {
             String currentText = hobbiesOptionsList.get(index).getText();
             if (hobbiesValues.contains(currentText)) {
-                js.executeScript("arguments[0].click();", hobbiesOptionsList.get(index));
+                elementMethods.clickJSElement(hobbiesOptionsList.get(index));
             }
         }
 
@@ -93,14 +87,12 @@ public class PracticeFormTest {
         dateOfBirth.click();
 
         WebElement monthElement = driver.findElement(By.className("react-datepicker__month-select"));
-        Select monthSelect = new Select(monthElement);
         String monthValue = "March";
-        monthSelect.selectByVisibleText(monthValue);
+        elementMethods.selectDropdownElement(monthElement, monthValue);
 
         WebElement yearElement = driver.findElement(By.className("react-datepicker__year-select"));
-        Select yearSelect = new Select(yearElement);
         String yearValue = "1989";
-        yearSelect.selectByVisibleText(yearValue);
+        elementMethods.selectDropdownElement(yearElement, yearValue);
 
         String dayValue = "21";
         List<WebElement> daysList = driver.findElements(By.xpath("//div[@class = 'react-datepicker__month-select"));
@@ -111,28 +103,28 @@ public class PracticeFormTest {
             }
         }
 
-//        WebElement stateElement = driver.findElement(By.xpath("//div[text()= 'Select State']"));
-//        js.executeScript("arguments[0].click();", stateElement);
-//
-//        WebElement stateInputElement = driver.findElement(By.id("react-select-3-input"));
-//        String stateValue = "NCR";
-//        stateInputElement.sendKeys(stateValue);
-//        stateInputElement.sendKeys(Keys.ENTER);
-//        // pentru dropdown am facut metoda asta
-//
-//        WebElement cityElement = driver.findElement(By.xpath("//div[text()= 'Select City']"));
-//        js.executeScript("arguments[0].click();", cityElement);
-//
-//        WebElement cityInputElement = driver.findElement(By.id("react-select-4-input"));
-//        String cityValue = "Delhi";
-//        cityInputElement.sendKeys(cityValue);
-//        cityInputElement.sendKeys(Keys.ENTER);
-//
-//        WebElement submitElement = driver.findElement(By.id("submit"));
-//        js.executeScript("arguments[0].click();", submitElement);
-//
-//        //validam datele introduse
-//
+        WebElement stateElement = driver.findElement(By.xpath("//div[text()= 'Select State']"));
+elementMethods.clickJSElement(stateElement);
+
+        WebElement stateInputElement = driver.findElement(By.id("react-select-3-input"));
+        String stateValue = "NCR";
+        stateInputElement.sendKeys(stateValue);
+        stateInputElement.sendKeys(Keys.ENTER);
+        // pentru dropdown am facut metoda asta
+
+        WebElement cityElement = driver.findElement(By.xpath("//div[text()= 'Select City']"));
+        elementMethods.clickJSElement(cityElement);
+
+        WebElement cityInputElement = driver.findElement(By.id("react-select-4-input"));
+        String cityValue = "Delhi";
+        cityInputElement.sendKeys(cityValue);
+        cityInputElement.sendKeys(Keys.ENTER);
+
+        WebElement submitElement = driver.findElement(By.id("submit"));
+        elementMethods.clickJSElement(submitElement);
+
+        //validam datele introduse
+
 //        WebElement tyElement = driver.findElement(By.id("example-modal-sizes-title-lg"));
 //        Assert.assertEquals(tyElement.getText(), "Thanks for submitting the form");
 //        List<WebElement> labelList = driver.findElements(By.xpath("//table[@class='table table-dark table-striped table-bordered table-hover']//td[1]"));
@@ -157,6 +149,4 @@ public class PracticeFormTest {
 //        Assert.assertEquals(labelValue.get(3).getText(), mobileNumberlValue);
 //de continuat
     }
-
-
 }
