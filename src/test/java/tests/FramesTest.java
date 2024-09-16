@@ -1,11 +1,14 @@
 package tests;
 
+import helpMethods.ElementMethods;
+import helpMethods.FrameMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.HomePage;
 
 import java.time.Duration;
 
@@ -22,6 +25,14 @@ public class FramesTest {
         driver.manage().window().maximize();
         //wait implicit
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        ElementMethods elementMethods = new ElementMethods(driver);
+        FrameMethods frameMethods = new FrameMethods(driver);
+        FramesPage framesPage = new FramesPage(driver);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.clickAlertFrameWindow();
+
 
         WebElement alertsFrameWindowsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.TabWindowPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class TabWindowTest {
         driver.manage().window().maximize();
 
         TabMethods tabMethods = new TabMethods(driver);
+        TabWindowPage tabWindowPage = new TabWindowPage();
 
         WebElement browseMenu = driver.findElement(By.xpath("//h5[text()= 'Alerts, Frame & Windows']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;

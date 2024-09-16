@@ -8,6 +8,7 @@ import java.time.Duration;
 
 public class FrameMethods {
     public WebDriver driver;
+
     @Test
 
     public void metodaTest() {
@@ -19,6 +20,7 @@ public class FrameMethods {
         driver.manage().window().maximize();
         //wait implicit
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
 
 
 
