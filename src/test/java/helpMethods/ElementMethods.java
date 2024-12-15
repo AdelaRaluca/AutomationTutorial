@@ -1,6 +1,7 @@
 package helpMethods;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ElementMethods {
     public WebDriver driver;
@@ -32,9 +34,20 @@ public class ElementMethods {
         element.sendKeys(text);
     }
 
+    public void fillPressElement(WebElement element, String text, Keys value) {
+        waitVisibleElement(element);
+        element.sendKeys(text);
+        element.sendKeys(value);
+    }
+
     public void waitVisibleElement(WebElement element){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void waitVisibleList(List<WebElement> List){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfAllElements(List));
     }
 
     public void selectDropdownElement(WebElement element, String text){
@@ -47,5 +60,9 @@ public class ElementMethods {
         waitVisibleElement(element);
         element.clear();
         element.sendKeys(text);
+    }
+    public void clearElement(WebElement element) {
+        waitVisibleElement(element);
+        element.clear();
     }
 }

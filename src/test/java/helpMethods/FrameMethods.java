@@ -1,28 +1,27 @@
 package helpMethods;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+@AllArgsConstructor
+
 public class FrameMethods {
     public WebDriver driver;
 
-    @Test
+    public void switchToSpecificIFrame(String value){
+        driver.switchTo().frame(value);
+    }
 
-    public void metodaTest() {
-        // deschidem un browser
-        driver = new ChromeDriver();
-        //accesam un url
-        driver.get("https://demoqa.com/");
-        //facem browser-ul maximize
-        driver.manage().window().maximize();
-        //wait implicit
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void switchToParentIFrame(){
+        driver.switchTo().parentFrame();
+    }
 
-
-
-
+    public void switchToSpecificIFrame(WebElement element){
+        driver.switchTo().frame(element);
     }
 }
